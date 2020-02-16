@@ -1,7 +1,8 @@
 import React from 'react';
+import { Discovery } from './pages/Discovery';
 
 function App() {
-  return <p>Hello.</p>;
+  return <Discovery />;
 }
 
 export default App;
