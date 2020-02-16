@@ -20,6 +20,9 @@ export const get = async (url, query = {}) => {
   return await response.json();
 };
 
+export const apiImage = path =>
+  `https://image.tmdb.org/t/p/w500/${path && path.replace('/', '')}`;
+
 export const discover = async () => {
   const data = await get('discover/movie');
 
