@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Header } from '../components';
 import { discover } from '../services/api';
 
 export const Discovery = () => {
