@@ -1,12 +1,12 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { rem } from 'polished';
 import styled from '@emotion/styled';
 import { FaFire } from 'react-icons/fa';
 
 import { discover, apiImage } from '../services/api';
-import { Container } from '../components';
+import { Container, Header } from '../components';
 
 const List = styled.ul`
   padding: 0;
@@ -59,5 +59,10 @@ export const Discovery = () => {
     getMovies();
   }, [movies]);
 
-  return <Container>{movies && <MovieList movies={movies} />}</Container>;
+  return (
+    <React.Fragment>
+      <Header showSearch={true} />
+      <Container>{movies && <MovieList movies={movies} />}</Container>
+    </React.Fragment>
+  );
 };

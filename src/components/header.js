@@ -1,15 +1,18 @@
-import React from 'react';
+/** @jsx jsx */
 import styled from '@emotion/styled';
-import headerImage from '../assets/images/header.jpg';
-import theme from '../theme';
+import { jsx } from '@emotion/core';
 import { darken, rem } from 'polished';
+
+import headerImage from '../assets/images/header.jpg';
+import { SearchInput } from '../components';
+import theme from '../theme';
 
 const HeaderBackground = styled.div`
   padding: ${rem(32)};
   background: url('${headerImage}') center center no-repeat;
   background-size: cover;
   position: relative;
-  height: 450px;
+  min-height: 450px;
 `;
 
 const Title = styled.h1`
@@ -39,13 +42,19 @@ const DarkOverlay = styled.div`
   right: 0;
   left: 0;
   z-index: 1;
+  text-align: center;
 `;
 
-export const Header = () => (
+export const Header = ({ showSearch = false }) => (
   <HeaderBackground>
     <DarkOverlay>
       <Title>Discover your next favorite movie.</Title>
       <Subtitle>Check out our award winning suggestions for February!</Subtitle>
+      {showSearch && (
+        <div css={{ marginTop: rem(48) }}>
+          <SearchInput />
+        </div>
+      )}
     </DarkOverlay>
   </HeaderBackground>
 );

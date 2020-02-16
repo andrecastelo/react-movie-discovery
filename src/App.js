@@ -5,13 +5,11 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
-import { Header } from './components';
 import { Discovery } from './pages/Discovery';
 
 function App() {
   return (
     <Router>
-      <Header />
       <Switch>
         <Route path="/">
           <Discovery />
