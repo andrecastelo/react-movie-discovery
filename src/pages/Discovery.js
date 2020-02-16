@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
-import React, { useEffect, useState } from 'react';
+import { jsx } from '@emotion/core';
+import { useEffect, useState } from 'react';
 import { rem } from 'polished';
 import styled from '@emotion/styled';
 import { discover, apiImage } from '../services/api';
@@ -54,13 +54,5 @@ export const Discovery = () => {
     getMovies();
   }, [movies]);
 
-  return (
-    <Container>
-      {movies && (
-        <>
-          <MovieList movies={movies} />
-        </>
-      )}
-    </Container>
-  );
+  return <Container>{movies && <MovieList movies={movies} />}</Container>;
 };
