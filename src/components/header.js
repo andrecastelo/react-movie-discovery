@@ -52,7 +52,7 @@ export const Header = ({ showSearch = false }) => (
       <Subtitle>Check out our award winning suggestions for February!</Subtitle>
       {showSearch && (
         <div css={{ marginTop: rem(48) }}>
-          <SearchInput />
+          <SearchInput onSearch={x => console.log(x)} />
         </div>
       )}
     </DarkOverlay>

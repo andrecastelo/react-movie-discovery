@@ -34,8 +34,16 @@ export const SearchInput = ({ onSearch }) => {
         value={value}
         onChange={e => setValue(e.target.value)}
         placeholder="Search..."
+        onKeyPress={e => {
+          if (e.key === 'Enter') {
+            onSearch(value);
+          }
+        }}
       />
-      <SearchButton css={{ position: 'absolute', top: 0, right: 0 }}>
+      <SearchButton
+        css={{ position: 'absolute', top: 0, right: 0 }}
+        onClick={() => onSearch(value)}
+      >
         <FaSearch />
       </SearchButton>
     </div>
