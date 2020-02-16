@@ -16,5 +16,15 @@ export const Discovery = () => {
 
   console.log({ movies });
 
-  return <Header></Header>;
+  return (
+    <div>
+      {movies && (
+        <ul>
+          {movies.map(movie => (
+            <li>{movie.title}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 };
