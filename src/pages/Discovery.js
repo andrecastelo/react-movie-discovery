@@ -3,6 +3,8 @@ import { jsx } from '@emotion/core';
 import { useEffect, useState } from 'react';
 import { rem } from 'polished';
 import styled from '@emotion/styled';
+import { FaFire } from 'react-icons/fa';
+
 import { discover, apiImage } from '../services/api';
 import { Container } from '../components';
 
@@ -27,8 +29,11 @@ const TopMovie = styled.li`
 `;
 
 const MovieList = ({ movies }) => (
-  <div css={{ marginTop: rem(96) }}>
-    <h2 css={{ fontSize: rem(24) }}>Popular Movies</h2>
+  <div css={{ margin: `${rem(96)} 0` }}>
+    <h2 css={{ fontSize: rem(24) }}>
+      <FaFire css={{ color: 'red', marginRight: 8 }} />
+      Popular Movies
+    </h2>
     <List>
       <TopMovie>
         <img src={apiImage(movies[0].poster_path)} alt={movies[0].title} />
