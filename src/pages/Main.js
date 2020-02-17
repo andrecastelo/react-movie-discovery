@@ -3,10 +3,16 @@ import { jsx } from '@emotion/core';
 import React, { useEffect, useState } from 'react';
 import { rem } from 'polished';
 import styled from '@emotion/styled';
-import { FaFire } from 'react-icons/fa';
+import { FaFire, FaSearch } from 'react-icons/fa';
 
 import { discover, search } from '../services/api';
-import { Container, Header, EmptyMovie, Movie } from '../components';
+import {
+  Container,
+  Header,
+  EmptyMovie,
+  Movie,
+  SectionTitle,
+} from '../components';
 import { useHistory } from 'react-router-dom';
 
 const List = styled.ul`
@@ -58,10 +64,10 @@ const MovieItem = ({ movie, isMain = false, ...props }) => {
 
 const MovieList = ({ movies }) => (
   <React.Fragment>
-    <h2 css={{ fontSize: rem(24) }}>
+    <SectionTitle>
       <FaFire css={{ color: 'red', marginRight: 8 }} />
       Popular Movies
-    </h2>
+    </SectionTitle>
     {movies && (
       <List>
         <MovieItem movie={movies[0]} isMain={true} />
@@ -76,7 +82,10 @@ const MovieList = ({ movies }) => (
 
 const ResultList = ({ movies }) => (
   <React.Fragment>
-    <h2 css={{ fontSize: rem(24) }}>Search Results</h2>
+    <SectionTitle>
+      <FaSearch css={{ marginRight: 8 }} />
+      Search Results
+    </SectionTitle>
     {movies && (
       <List>
         {movies.map(movie => (

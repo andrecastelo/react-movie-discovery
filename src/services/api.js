@@ -4,7 +4,7 @@ import { stringify } from 'query-string';
 const urlBuilder = (resource, queryData = {}) => {
   const querystring = stringify({
     api_key: config.apiKey,
-    ...queryData
+    ...queryData,
   });
   const base = 'https://api.themoviedb.org/3';
 
@@ -14,7 +14,7 @@ const urlBuilder = (resource, queryData = {}) => {
 export const get = async (url, query = {}) => {
   const response = await fetch(urlBuilder(url, query), {
     method: 'get',
-    cors: 'none'
+    cors: 'none',
   });
 
   return await response.json();
@@ -31,8 +31,12 @@ export const discover = async () => {
 
 export const search = async query => {
   const data = await get('search/movie', {
-    query: encodeURI(query)
+    query: encodeURI(query),
   });
 
   return data.results;
+};
+
+export const getMovie = async id => {
+  return await get(`movie/${id}`);
 };
