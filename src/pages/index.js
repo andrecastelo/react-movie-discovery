@@ -1,1 +1,1 @@
-export * from './Discovery';
+export * from './Main';

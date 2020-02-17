@@ -45,14 +45,14 @@ const DarkOverlay = styled.div`
   text-align: center;
 `;
 
-export const Header = ({ showSearch = false }) => (
+export const Header = ({ onSearch }) => (
   <HeaderBackground>
     <DarkOverlay>
       <Title>Discover your next favorite movie.</Title>
       <Subtitle>Check out our award winning suggestions for February!</Subtitle>
-      {showSearch && (
+      {onSearch && (
         <div css={{ marginTop: rem(48) }}>
-          <SearchInput onSearch={x => console.log(x)} />
+          <SearchInput onSearch={onSearch} />
         </div>
       )}
     </DarkOverlay>

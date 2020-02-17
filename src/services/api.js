@@ -28,3 +28,11 @@ export const discover = async () => {
 
   return data.results;
 };
+
+export const search = async query => {
+  const data = await get('search/movie', {
+    query: encodeURI(query)
+  });
+
+  return data.results;
+};
