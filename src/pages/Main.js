@@ -7,6 +7,7 @@ import { FaFire } from 'react-icons/fa';
 
 import { discover, search } from '../services/api';
 import { Container, Header, EmptyMovie, Movie } from '../components';
+import { useHistory } from 'react-router-dom';
 
 const List = styled.ul`
   padding: 0;
@@ -23,16 +24,37 @@ const List = styled.ul`
   }
 `;
 
-const TopMovie = styled.li`
-  grid-column: 1 / 3;
-  grid-row: 1 / 3;
-`;
+const MovieItem = ({ movie, isMain = false, ...props }) => {
+  const history = useHistory();
+  const redirect = () => {
+    history.push(`/movies/${movie.id}`);
+  };
 
-const MovieItem = ({ movie, ...props }) => (
-  <li css={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-    {movie.poster_path ? <Movie movie={movie} /> : <EmptyMovie movie={movie} />}
-  </li>
-);
+  const mainStyle = isMain
+    ? {
+        gridColumn: '1 / 3',
+        gridRow: '1 / 3',
+      }
+    : {};
+
+  return (
+    <li
+      css={{
+        display: 'flex',
+        alignItems: 'center',
+        cursor: 'pointer',
+        ...mainStyle,
+      }}
+      onClick={redirect}
+    >
+      {movie.poster_path ? (
+        <Movie movie={movie} />
+      ) : (
+        <EmptyMovie movie={movie} />
+      )}
+    </li>
+  );
+};
 
 const MovieList = ({ movies }) => (
   <React.Fragment>
@@ -42,9 +64,8 @@ const MovieList = ({ movies }) => (
     </h2>
     {movies && (
       <List>
-        <TopMovie>
-          <Movie movie={movies[0]} />
-        </TopMovie>
+        <MovieItem movie={movies[0]} isMain={true} />
+
         {movies.slice(1, 9).map(movie => (
           <MovieItem key={movie.id} movie={movie} />
         ))}

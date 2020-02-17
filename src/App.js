@@ -3,9 +3,9 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
 } from 'react-router-dom';
-import { Main } from './pages/Main';
+import { Main, MovieDetail } from './pages';
 
 function App() {
   return (
@@ -13,6 +13,9 @@ function App() {
       <Switch>
         <Route path="/">
           <Main />
+        </Route>
+        <Route path="/movies/:id">
+          <MovieDetail />
         </Route>
         <Redirect to="/" />
       </Switch>
