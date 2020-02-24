@@ -68,7 +68,7 @@ const MovieList = ({ movies }) => (
       <FaFire css={{ color: 'red', marginRight: 8 }} />
       Popular Movies
     </SectionTitle>
-    {movies && (
+    {movies && movies.length > 0 && (
       <List>
         <MovieItem movie={movies[0]} isMain={true} />
 
