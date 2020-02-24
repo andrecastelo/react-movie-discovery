@@ -12,7 +12,7 @@ const HeaderBackground = styled.div`
   background: url('${headerImage}') center center no-repeat;
   background-size: cover;
   position: relative;
-  min-height: 450px;
+  min-height: 350px;
 `;
 
 const Title = styled.h1`
@@ -21,7 +21,7 @@ const Title = styled.h1`
   text-align: center;
   font-weight: normal;
   color: #fff;
-  margin-top: ${rem(150)};
+  margin-top: ${rem(75)};
   margin-bottom: ${rem(25)};
 `;
 
