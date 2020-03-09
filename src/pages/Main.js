@@ -1,9 +1,10 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
+import { jsx, css } from '@emotion/core';
 import React, { useEffect, useState } from 'react';
 import { rem } from 'polished';
 import styled from '@emotion/styled';
 import { FaFire, FaSearch } from 'react-icons/fa';
+import { Box, Flex, Rating } from '../components';
 
 import { discover, search } from '../services/api';
 import {
@@ -80,25 +81,52 @@ const MovieList = ({ movies }) => (
   </React.Fragment>
 );
 
-const ResultList = ({ movies }) => (
-  <React.Fragment>
-    <SectionTitle>
-      <FaSearch css={{ marginRight: 8 }} />
-      Search Results
-    </SectionTitle>
-    {movies && (
-      <List>
-        {movies.map(movie => (
-          <MovieItem key={movie.id} movie={movie} />
-        ))}
-      </List>
-    )}
-  </React.Fragment>
-);
+const ResultList = ({ movies, rating, onRatingClick }) => {
+  const filteredMovies =
+    rating !== null
+      ? movies.filter(({ vote_average }) => {
+          return vote_average > rating - 2 && vote_average <= rating;
+        })
+      : movies;
+
+  return (
+    <React.Fragment>
+      <SectionTitle>
+        <Flex justifyContent="space-between">
+          <Box>
+            <FaSearch css={{ marginRight: 8 }} />
+            Search Results
+          </Box>
+          <Box>
+            <p
+              css={css`
+                font-size: 14px;
+                margin: 0 0 -12px 0;
+              `}
+            >
+              Filter by rating:{' '}
+            </p>
+            <Rating rating={rating} onClick={onRatingClick} />
+          </Box>
+        </Flex>
+      </SectionTitle>
+      {filteredMovies && filteredMovies.length > 0 ? (
+        <List>
+          {filteredMovies.map(movie => (
+            <MovieItem key={movie.id} movie={movie} />
+          ))}
+        </List>
+      ) : (
+        <p>There are no movies with the selected filters</p>
+      )}
+    </React.Fragment>
+  );
+};
 
 export const Main = () => {
   const [movies, setMovies] = useState(undefined);
   const [isSearch, setSearchMode] = useState(false);
+  const [rating, setRating] = useState(null);
 
   const getMovies = async () => {
     const movies = await discover();
@@ -116,6 +144,14 @@ export const Main = () => {
     }
   };
 
+  const handleRatingClick = newRating => {
+    if (newRating === rating) {
+      setRating(null);
+    } else {
+      setRating(newRating);
+    }
+  };
+
   useEffect(() => {
     if (!movies) {
       getMovies();
@@ -128,7 +164,11 @@ export const Main = () => {
       <Container>
         <div css={{ margin: `${rem(96)} 0` }}>
           {isSearch ? (
-            <ResultList movies={movies} />
+            <ResultList
+              rating={rating}
+              movies={movies}
+              onRatingClick={handleRatingClick}
+            />
           ) : (
             <MovieList movies={movies} />
           )}

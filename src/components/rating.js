@@ -1,22 +1,42 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
+import { FaStar, FaRegStar } from 'react-icons/fa';
 
-export const Rating = ({ rating = 0 }) => {
+export const Rating = ({ rating, onClick }) => {
   const roundedRating = Math.round(rating);
-  const halfStarCount = roundedRating % 2;
-  const fullStarCount = Math.floor(roundedRating / 2);
-  const emptyStarCount = Math.max(5 - (fullStarCount + halfStarCount), 0);
+  const starStyle = { cursor: onClick ? 'pointer' : 'auto' };
 
   return (
     <p css={{ fontSize: 16, color: 'red' }}>
-      {[...Array(fullStarCount)].map((_, index) => (
-        <FaStar key={`full_star-${index}`} />
-      ))}
-      {halfStarCount ? <FaStarHalfAlt /> : undefined}
-      {[...Array(emptyStarCount)].map((_, index) => (
-        <FaRegStar key={`empty_star-${index}`} />
-      ))}
+      {roundedRating && roundedRating >= 0 ? (
+        <FaStar css={starStyle} onClick={() => onClick(0)} />
+      ) : (
+        <FaRegStar css={starStyle} onClick={() => onClick(0)} />
+      )}
+
+      {roundedRating && roundedRating >= 2 ? (
+        <FaStar css={starStyle} onClick={() => onClick(2)} />
+      ) : (
+        <FaRegStar css={starStyle} onClick={() => onClick(2)} />
+      )}
+
+      {roundedRating && roundedRating >= 4 ? (
+        <FaStar css={starStyle} onClick={() => onClick(4)} />
+      ) : (
+        <FaRegStar css={starStyle} onClick={() => onClick(4)} />
+      )}
+
+      {roundedRating && roundedRating >= 6 ? (
+        <FaStar css={starStyle} onClick={() => onClick(6)} />
+      ) : (
+        <FaRegStar css={starStyle} onClick={() => onClick(6)} />
+      )}
+
+      {roundedRating && roundedRating >= 8 ? (
+        <FaStar css={starStyle} onClick={() => onClick(8)} />
+      ) : (
+        <FaRegStar css={starStyle} onClick={() => onClick(8)} />
+      )}
     </p>
   );
 };
